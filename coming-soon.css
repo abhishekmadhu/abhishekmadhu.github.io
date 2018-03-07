@@ -281,17 +281,17 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 }
 
 body,h1 {font-family: "Raleway", sans-serif}
-body, html {height: 100%}
+body, html {height: 110%}
 /*<<<<<<< HEAD*/
 
 /*=======
 >>>>>>> parent of 0685a6c... BGIMG trial*/
 .bgimg {
     background-image: url('/landing-images/bw-web-bg-ready1.jpg');
-    min-height: 100%;
+    min-height: 110%;
     background-position: center;
     background-size: cover;
-    padding-top: 20px;
+    padding-top: 30px;
 /*<<<<<<<*/ /*HEAD*/
 /*=======*/
 /*>>>>>>> parent of 0685a6c... BGIMG trial*/
