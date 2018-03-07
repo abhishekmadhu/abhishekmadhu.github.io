@@ -288,3 +288,33 @@ body, html {height: 100%}
     background-position: center;
     background-size: cover;
 }
+
+/*****************************/
+
+.darken-with-text p {
+  margin: 0;
+  font-size: 2em;
+  text-align: center;
+  color: #fefefe;
+  padding-top: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+.darken-pseudo {
+  position: relative;
+}
+
+.darken-pseudo:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.my-text-white,.my-hover-text-white:hover
+{color:#fefefe !important;}
