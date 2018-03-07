@@ -1,11 +1,22 @@
 body {
 	font-family: Source Sans Pro, serif;
 
-	max-width: 700px;
+	max-width: 100%;
+	width: 100%;
+	padding: 20px;
+
+	margin-top: 60px;
+	margin: auto;
+
+}
+
+.frame {
+	font-family: Source Sans Pro, serif;
+	max-width: 800px;
 	width: 80%;
 	padding: 20px;
 	border: 20px solid #bdc3c7;
-	margin: 20px auto;  /*aligns to middle*/
+	margin: 45px auto;  /*aligns to middle*/
 	/*vertical-align: middle;*/
 	/*margin-left: 10%;*/
 }
