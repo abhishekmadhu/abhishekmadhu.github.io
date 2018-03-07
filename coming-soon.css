@@ -318,3 +318,8 @@ body, html {height: 100%}
 
 .my-text-white,.my-hover-text-white:hover
 {color:#fefefe !important;}
+
+.back-blend {
+	background: rgba(0, 0, 0, 0.05);
+
+}
