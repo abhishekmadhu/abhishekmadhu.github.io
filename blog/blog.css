@@ -1,6 +1,8 @@
 body {
 	font-family: 'Source Sans Pro', serif;
-
+	background: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/EvVhCC0deijtsl1b4/videoblocks-programming-code-background-abstract-seamless-loop-animation_bklmxmhjw_thumbnail-full01.png) fixed;
+	/*background: url(http://thecutestblogontheblock.com/wp-content/uploads/2011/11/flutter-by-free-background-3-column-spring-copy-1000x500.jpg) fixed;*/
+	background-size: 100%;
 	max-width: 100%;
 	width: 100%;
 	padding: 70px 20px;
@@ -12,8 +14,11 @@ body {
 
 .frame {
 	font-family: Source Sans Pro, serif;
+	background: #ffffffe8;
 	max-width: 800px;
-	width: 80%;
+	min-width: 300px;
+	position: center;
+	width: 55%;
 	padding: 20px;
 	border: 20px solid #bdc3c7;
 	margin: 45px auto;  /*aligns to middle*/
@@ -41,13 +46,13 @@ hr {
 }
 
 .first-para-of-each-blog {
-	border-left: 5px solid lightgray;
+	border-left: 5px solid #bdbdf1;
 	padding-left: 4px;
 }
 
 .blog {
 	font-family: 'Raleway', serif;
-	font-size: 1.1em;
+	font-size: 1.2em;
 }
 
 .navbar {
