@@ -1,0 +1,48 @@
+#  this module tends to automate the login process
+import os
+import webbrowser
+from bs4 import BeautifulSoup
+import requests
+
+# sessions for persistent login
+my_session = requests.session()
+
+url = 'https://www.codecademy.com/learn'
+
+
+data = {
+   'authenticity_token': 'ihGygtFEAdAPD1ycxs52p33eo63hbcGXWrye07+Yu2Q=',
+   'user[login]': 'abhishekmadhu.uem@gmail.com',
+   'user[password]': 'password123'
+}
+
+# get the page shown only after login
+page = my_session.post(url=url, data=data)
+
+
+# print(page.content)
+
+
+# write the content to a html file to show later
+htmlfile = open("html.html", 'w')
+htmlfile.write(str(page.content))
+htmlfile.close()
+
+# get the username
+soup = BeautifulSoup(str(page.content))
+username = soup.find("h1", {"class": "username__2XadxoeCL3__ps0TM7GI6k"})
+print(username.get_text(), ' is Logged In now!')
+
+
+# display a snippet of the content in the ieexplorer
+# the name of the user appears there--
+# PLEASE DO NOT ALLOW blocked content in the browser window
+# I will debug the reason for the issue, but apparently
+# some scripts are hiding the content in the web page
+
+try:
+    ie = webbrowser.get(webbrowser.iexplorer)
+    ie.open('file://' + os.path.realpath('html.html'))
+
+except Exception as e:
+    print 'Could not open IExplorer'
