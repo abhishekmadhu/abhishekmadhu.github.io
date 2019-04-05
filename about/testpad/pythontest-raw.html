@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h1>AUTOMATED LOGIN PROBLEM</h1>
+<code>
+#  this module tends to automate the login process
+import os
+import webbrowser
+from bs4 import BeautifulSoup
+import requests
+
+# sessions for persistent login
+my_session = requests.session()
+
+url = 'https://www.codecademy.com/learn'
+
+
+data = {
+   'authenticity_token': 'ihGygtFEAdAPD1ycxs52p33eo63hbcGXWrye07+Yu2Q=',
+   'user[login]': 'abhishekmadhu.uem@gmail.com',
+   'user[password]': 'password123'
+}
+
+# get the page shown only after login
+page = my_session.post(url=url, data=data)
+
+
+# print(page.content)
+
+
+# write the content to a html file to show later
+htmlfile = open("html.html", 'w')
+htmlfile.write(str(page.content))
+htmlfile.close()
+
+# get the username
+soup = BeautifulSoup(str(page.content))
+username = soup.find("h1", {"class": "username__2XadxoeCL3__ps0TM7GI6k"})
+print(username.get_text(), ' is Logged In now!')
+
+
+# display a snippet of the content in the ieexplorer
+# the name of the user appears there--
+# PLEASE DO NOT ALLOW blocked content in the browser window
+# I will debug the reason for the issue, but apparently
+# some scripts are hiding the content in the web page
+
+try:
+    ie = webbrowser.get(webbrowser.iexplorer)
+    ie.open('file://' + os.path.realpath('html.html'))
+
+except Exception as e:
+    print 'Could not open IExplorer'
+</code>
+
+ <hr>
+
+ <h1>XLSX parsing Problem</h1>
+
+ from __future__ import print_function
+# for using print as a command, not as a command
+from collections import OrderedDict
+
+
+import xlrd
+import datetime
+import json
+
+
+# the ToParse_python.xlsx is located one directory
+# above the current file in this system
+datafile = xlrd.open_workbook('../ToParse_Python.xlsx')
+sheet = datafile.sheet_by_index(0)  # getting the first sheet
+
+
+
+
+def get_cell_data(r, c):
+   '''
+
+
+   :param r: row
+   :param c: column
+   :return: the data, appropriately modified, for each cell
+   '''
+
+
+   cell_value = sheet.cell(r, c)
+   data = cell_value.value
+   type = cell_value.ctype
+
+
+
+
+   if type == 3:       # implies that the data is a date
+       data = xlrd.xldate.xldate_as_datetime(data, datafile.datemode)
+       data = data.strftime('%Y-%m-%d')    # change it to the required format
+
+
+   return data
+
+
+
+
+if __name__ == '__main__':
+   mydict = OrderedDict()
+
+
+   # get the quote number
+   row = 1
+   col = 1
+   qn = get_cell_data(row, col)
+   col += 1
+   qn_val = get_cell_data(row, col)
+   mydict[qn] = int(qn_val)
+
+
+   # get the date key-value pair
+   col += 2
+   dt = get_cell_data(row, col)
+   col += 1
+   dt_val = get_cell_data(row, col)
+   mydict[dt] = dt_val
+
+
+   # Get the shipping address
+   row, col = 3, 1
+   st = get_cell_data(row, col)
+   col += 1
+   st_val = get_cell_data(row, col)
+   mydict[st] = st_val
+
+
+   # Get the name
+   row, col = 5, 1
+   name_text = get_cell_data(row, col)
+   key, name = str(name_text).strip().split(':')  # separate the name from the key
+   mydict[key] = name
+
+
+   # initiate the column parsing procedure
+   row, col = 9, 2
+   MAX_COL = 6
+   MAX_ROW = 2
+
+
+   items_list = []  # list to add items
+
+
+   # to get the headers for each column. This can be done dynamically also
+   headers = ['LineNumber', 'PartNumber', 'Description', 'Item Type', 'Price']
+
+
+   # iterate over all the data in the tabular part of the sheet
+   for r in range(row, row + MAX_ROW):
+       index = col - 2  # as the table is shifted 2 columns to the right
+       eachitem = {}
+       for c in range(col, col + MAX_COL - 1):
+           val = get_cell_data(r, c)
+
+
+           # get the header
+           c_header = headers[index]
+
+
+           eachitem[c_header] = val
+
+
+           index = index + 1
+
+
+       items_list.append(eachitem)
+
+
+   mydict['Items'] = items_list
+
+
+   # format the dictionary in the required manner
+   # making it a json object helps transmission over HTTP
+   json_file = json.dumps(mydict, indent=4, sort_keys=False)
+
+
+   print(json_file)
+</body>
+</html>
