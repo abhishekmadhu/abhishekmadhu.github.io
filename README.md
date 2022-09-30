@@ -2,4 +2,4 @@
 
 
 
-<p>To go to the website, please click <a href="https://www.abhishekmadhu.github.io">here</a>.</p>
+<p>To go to the website, please click <a href="https://abhishekmadhu.github.io/">here</a>.</p>
